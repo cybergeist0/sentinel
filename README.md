@@ -51,13 +51,13 @@
 
  ---
 
- ## 📤 Export Logs
+ ## Export Logs
 
  Click **“Export CSV”** to download the current audit log. Default export path is defined in `appsettings.json`.
 
  ---
 
- ## 🔒 Security
+ ## Security
 
  - PowerShell agents should only be deployed in trusted environments  
  - Credentials are not stored — agents are passive  
