@@ -1,0 +1,4 @@
+{
+  "port": 5005,
+  "maintenance_file": "maintenance.json"
+}

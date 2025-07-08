@@ -1,0 +1,44 @@
+﻿<Window x:Class="GUI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:GUI.ViewModels"
+        Title="DBACS Sentinel - Server Monitor" Height="500" Width="900">
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <DockPanel Margin="10">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,0,0,10">
+            <Button x:Name="btnScan" Content="Scan Network" Width="120" Height="30" Margin="0,0,10,0" Click="OnScanClick"/>
+            <Button x:Name="btnExport" Content="Export CSV" Width="120" Height="30" Click="OnExportClick"/>
+            <TextBlock x:Name="txtStatus" Margin="20,5,0,0" VerticalAlignment="Center" Text="Idle" FontWeight="Bold"/>
+        </StackPanel>
+
+        <ListView x:Name="lvServers" DockPanel.Dock="Top" Height="370"
+                  ItemsSource="{Binding Servers}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="IP Address"     Width="120" DisplayMemberBinding="{Binding Ip}" />
+                    <GridViewColumn Header="Hostname"       Width="150" DisplayMemberBinding="{Binding Hostname}" />
+                    <GridViewColumn Header="Status"         Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding IsInMaintenance, Converter={StaticResource MaintStatusConverter}}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="OS Version"     Width="200" DisplayMemberBinding="{Binding OSVersion}" />
+                    <GridViewColumn Header="Uptime (hrs)"   Width="100" DisplayMemberBinding="{Binding UptimeHours}" />
+                    <GridViewColumn Header="Free Disk (GB)" Width="120" DisplayMemberBinding="{Binding FreeDiskGB}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StatusBar DockPanel.Dock="Bottom" Margin="0,10,0,0">
+            <StatusBarItem>
+                <TextBlock x:Name="txtBottomStatus" Text="Ready" />
+            </StatusBarItem>
+        </StatusBar>
+    </DockPanel>
+</Window>
